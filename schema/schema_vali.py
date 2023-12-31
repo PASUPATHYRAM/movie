@@ -1,4 +1,4 @@
-from pydantic import BaseModel,field_validator,ValidationError
+from pydantic import BaseModel,field_validator,ValidationError,Field
 from typing import Optional
 from datetime import datetime
 
@@ -32,6 +32,23 @@ class Movieout(Movie_vali):
     id: int
     class Config:
         orm_mode=True
+
+class Theatres_vali(BaseModel):
+
+    theatre: str= Field(...)
+
+
+    @field_validator('theatre')
+    def name_convert1(cls, v: str):
+        return v.upper()
+
+class Theatres_out(Theatres_vali):
+    id: int
+    class Config:
+        orm_mode=True
+
+
+
 
 
 
